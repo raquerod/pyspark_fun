@@ -12,5 +12,7 @@ init_notebook_mode(connected=True)
 
 ```
 import pandas as pd
-pd.set_option("display.max_columns", 100)
+pd.set_option('display.max_columns', 100)
+pd.set_option('display.max_colwidth', -1)
+pd.set_option('display.max_rows', 200) # first 100 last 100
 ```
