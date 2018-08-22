@@ -17,6 +17,7 @@ pd.set_option('display.max_colwidth', -1)
 pd.set_option('display.max_rows', 200) # first 100 last 100
 ```
 ### Clean docker
+```
 docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
-
+```
