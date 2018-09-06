@@ -21,3 +21,7 @@ pd.set_option('display.max_rows', 200) # first 100 last 100
 docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
 ```
+### Copy one bucket into another one in S3
+```
+aws s3 sync s3://bucket1/path/to/file s3://bucket2/path/to/file
+```
