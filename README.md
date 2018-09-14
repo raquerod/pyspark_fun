@@ -21,8 +21,13 @@ pd.set_option('display.max_rows', 200) # first 100 last 100
 
 #### Clean images
 ```
+docker images
 docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
+```
+#### Build Image
+```
+docker build -t REPOSITORY_NAME:TAG /path/to/image
 ```
 ### AWS
 
