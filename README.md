@@ -3,13 +3,18 @@ Things I never remember
 
 ### Jupyter
 
+#### Launching Pyspark locally in Jupyter
+```
+PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook pyspark --packages org.apache.hadoop:hadoop-aws:2.8.1,org.postgresql:postgresql:42.1.3.
+```
+
 #### Plotly
 ```
 from plotly.offline import download_plotlyjs, init_notebook_mode, iplot
 import plotly.graph_objs as go
 init_notebook_mode(connected=True)
 ```
-### Columns for Pandas DF
+#### Columns for Pandas DF
 
 ```
 import pandas as pd
