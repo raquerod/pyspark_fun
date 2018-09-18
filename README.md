@@ -40,3 +40,10 @@ docker build -t REPOSITORY_NAME:TAG /path/to/image
 ```
 aws s3 sync s3://bucket1/path/to/file s3://bucket2/path/to/file
 ```
+
+### GIT
+
+#### Remove the last commit
+```
+git reset --hard HEAD^
+```
