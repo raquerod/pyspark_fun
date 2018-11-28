@@ -10,9 +10,9 @@ PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS=notebook pyspark --pack
 
 #### Plotly
 ```
-from plotly.offline import download_plotlyjs, init_notebook_mode, iplot
+from plotly import offline as py
 import plotly.graph_objs as go
-init_notebook_mode(connected=True)
+py.init_notebook_mode(connected=False)
 ```
 #### Columns for Pandas DF
 
