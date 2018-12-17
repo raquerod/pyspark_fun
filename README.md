@@ -38,7 +38,12 @@ docker build -t REPOSITORY_NAME:TAG /path/to/image
 
 #### Copy one bucket into another one in S3
 ```
-aws s3 sync s3://bucket1/path/to/file s3://bucket2/path/to/file
+aws s3 sync s3://bucket/path/to/file s3://bucket2/path/to/file
+```
+
+#### Remove keys
+```
+aws s3 rm s3://bucket/path/to/file --recursive
 ```
 
 ### GIT
