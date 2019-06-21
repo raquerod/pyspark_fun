@@ -34,6 +34,10 @@ docker rmi $(docker images -q)
 ```
 docker build -t REPOSITORY_NAME:TAG /path/to/image
 ```
+#### Add nltk download to dockerfile
+```
+RUN python -m nltk.downloader punkt stopwords wordnet
+```
 ### AWS
 
 #### Copy one bucket into another one in S3
