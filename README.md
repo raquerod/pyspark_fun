@@ -95,3 +95,7 @@ def write_google_sheet(url, *, df, title, mode='overwrite'):
     worksheet.insert_rows(row=1, values=values, inherit=True)
     return worksheet
 ```
+### Spark
+
+sqlContext = SQLContext(sc)
+sqlContext.setConf("spark.sql.shuffle.partitions", 400)
