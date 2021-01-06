@@ -100,3 +100,42 @@ def write_google_sheet(url, *, df, title, mode='overwrite'):
 sqlContext = SQLContext(sc)
 sqlContext.setConf("spark.sql.shuffle.partitions", 400)
 ```
+
+### IDF Feats
+```
+webtext = [
+            (['i', 'love', 'dogs'], "raquel.com"), 
+            (['i', 'hate', 'dogs', 'and', 'plants'], "ericka.com"),
+            (['plants', 'are', 'my', 'hobby', 'and', 'my', 'passion'], "wzd.com")
+          ]
+
+columns = ["text", "normalized_url"]
+textDF = spark.createDataFrame(data=webtext, schema = columns)
+countVect = CountVectorizer(inputCol="text", outputCol="tf",  minDF=1.0)
+
+model = countVect.fit(textDF)
+result = model.transform(textDF)
+model.vocabulary
+
+idf = IDF(inputCol="tf", outputCol="idf_col")
+idfModel = idf.fit(result)
+rescaledData = idfModel.transform(result)
+
+vocab = sc.broadcast(model.vocabulary)
+
+@F.udf(T.ArrayType(T.ArrayType(T.StringType())))
+def get_tfidf(idf):
+    ind = idf.indices.tolist()
+    feats = idf.values.tolist()
+    voc = [vocab.value[w] for w in ind]
+    return [[w,feats[i]] for i, w in enumerate(voc)]
+
+(rescaledData
+ .withColumn('tf_idf', get_tfidf('idf_col'))
+ .select(F.explode('tf_idf'))
+ .dropDuplicates()
+ .withColumn('word', F.col('col').getItem(0))
+ .withColumn('tfidf', F.col('col').getItem(1).cast(T.DoubleType()))
+ .orderBy(c.tfidf.desc())
+ .toPandas())
+```
